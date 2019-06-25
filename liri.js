@@ -5,6 +5,7 @@ var keys = require("./keys.js");
 //var spotify = new Spotify(keys.spotify);
 
 var axios = require("axios");
+var moment = require("moment");
 var nodeArgs = process.argv;
 var artist = "";
 for (var i = 2; i < nodeArgs.length; i++) {
@@ -16,19 +17,16 @@ for (var i = 2; i < nodeArgs.length; i++) {
   
     }
 } 
+console.log(artist)
 var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 console.log(queryUrl);
 
 axios.get(queryUrl).then(
     function(response) {
       //console.log(response);
-      console.log(response.EventData);
-      //console.log(response.data[0].venue);
-      console.log(response[0]);
-      console.log(JSON.stringify(response[0]));  
-      //console.log("Name of the Venue: " + response.venue.name);
-      //console.log("Venue Location: " +response.venue.city+" "+response.venue.region);
-      //console.log(response.datetime);
+      console.log("Name of the venue: " +response.data[1].venue.name);
+      console.log("Venue location: " +response.data[1].venue.region);
+      console.log("Date of the Event: " +moment(response.data[2].datetime).format("MM/DD/YYYY"));
     })
     .catch(function(error) {
       if (error.response) {
@@ -50,3 +48,19 @@ axios.get(queryUrl).then(
       }
       console.log(error.config);
 });
+
+// var input;
+// switch(operand) {
+//     case "concert-this":
+//     break;
+
+//     case "spotify-this-song":
+//     break;
+
+//     case "movie-this":
+//     break;
+
+//     case "do-what-it-says":
+//     break;
+// }
+
