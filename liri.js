@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 var keys = require("./keys.js");
-//var spotify = new Spotify(keys.spotify);
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var moment = require("moment");
 var option = process.argv[2];
@@ -43,20 +44,39 @@ axios.get(queryUrl).then(
 });
 }
 
+function displaySong(song) {
+    console.log(song);
+
+    spotify
+    .request("https://api.spotify.com/v1/search?q="+song+"&type=track")
+    .then(function(response) {
+      //console.log(response);
+      console.log("Artist(s): "+response.tracks.items[0].album.artists[0].name); 
+      console.log("Song Name: "+song);
+      console.log("Preview Link: "+response.tracks.items[0].href);
+      console.log("Album: "+response.tracks.items[0].album.name);
+    })
+    .catch(function(err) {
+      console.error('Error occurred: ' + err); 
+    })
+}
+
 function run(option, input) {
 switch(option) {
     case "concert-this":
     bands(input);
     break;
 
-//     case "spotify-this-song":
-//     break;
+    case "spotify-this-song":
+    displaySong(input);
+    break;
 
-//     case "movie-this":
-//     break;
+//  case "movie-this":
+//  break;
 
-//     case "do-what-it-says":
-//     break;
+//  case "do-what-it-says":
+//  break;
+    
     default:
         console.log("Command not found");
 }
