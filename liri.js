@@ -108,10 +108,11 @@ function display() {
         }
       
         // We will then print the contents of data
-        console.log(data);
+        //console.log(data);
         
         // Then split it by commas (to make it more readable)
         var dataArr = data.split(",");
+        run(dataArr[0], dataArr[1]);
         
         // We will then re-display the content as an array for later use.
         console.log(dataArr);
