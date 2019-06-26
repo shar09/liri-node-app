@@ -7,7 +7,7 @@ var axios = require("axios");
 var moment = require("moment");
 var option = process.argv[2];
 var input = process.argv.slice(3).join(" ");
-
+var fs = require("fs");
 function displayBands(artist) {
 
 //var artist = input;
@@ -99,6 +99,26 @@ function displayMovie(movie) {
       
 }
 
+function display() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+          return console.log(error);
+        }
+      
+        // We will then print the contents of data
+        console.log(data);
+        
+        // Then split it by commas (to make it more readable)
+        var dataArr = data.split(",");
+        
+        // We will then re-display the content as an array for later use.
+        console.log(dataArr);
+      });
+      
+}
+
 function run(option, input) {
 switch(option) {
     case "concert-this":
@@ -113,8 +133,9 @@ switch(option) {
     displayMovie(input);
     break;
 
-//  case "do-what-it-says":
-//  break;
+    case "do-what-it-says":
+    display();
+    break;
     
     default:
     console.log("Command not found");
