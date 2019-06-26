@@ -1,32 +1,25 @@
 require("dotenv").config();
 
 var keys = require("./keys.js");
-
 //var spotify = new Spotify(keys.spotify);
-
 var axios = require("axios");
 var moment = require("moment");
-var nodeArgs = process.argv;
-var artist = "";
-for (var i = 2; i < nodeArgs.length; i++) {
+var option = process.argv[2];
+var input = process.argv.slice(3).join(" ");
 
-    if (i > 2 && i < nodeArgs.length) {
-      artist = artist + "+" + nodeArgs[i];
-    } else {
-      artist += nodeArgs[i];
-  
-    }
-} 
+function bands(artist) {
+
+//var artist = input;
+
 console.log(artist)
 var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-console.log(queryUrl);
-
+//console.log(queryUrl);
 axios.get(queryUrl).then(
     function(response) {
       //console.log(response);
-      console.log("Name of the venue: " +response.data[1].venue.name);
-      console.log("Venue location: " +response.data[1].venue.region);
-      console.log("Date of the Event: " +moment(response.data[2].datetime).format("MM/DD/YYYY"));
+      console.log("Name of the venue: " +response.data[0].venue.name);
+      console.log("Venue location: " +response.data[0].venue.region);
+      console.log("Date of the Event: " +moment(response.data[0].datetime).format("MM/DD/YYYY"));
     })
     .catch(function(error) {
       if (error.response) {
@@ -48,11 +41,13 @@ axios.get(queryUrl).then(
       }
       console.log(error.config);
 });
+}
 
-// var input;
-// switch(operand) {
-//     case "concert-this":
-//     break;
+function run(option, input) {
+switch(option) {
+    case "concert-this":
+    bands(input);
+    break;
 
 //     case "spotify-this-song":
 //     break;
@@ -62,5 +57,9 @@ axios.get(queryUrl).then(
 
 //     case "do-what-it-says":
 //     break;
-// }
+    default:
+        console.log("Command not found");
+}
+}
 
+run(option, input);
