@@ -8,10 +8,9 @@ var moment = require("moment");
 var option = process.argv[2];
 var input = process.argv.slice(3).join(" ");
 var fs = require("fs");
+
 function displayBands(artist) {
-
 //var artist = input;
-
 console.log(artist)
 var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 //console.log(queryUrl);
@@ -45,8 +44,13 @@ axios.get(queryUrl).then(
 }
 
 function displaySong(song) {
-    console.log(song);
-
+    
+    // if(option === "spotify-this-song" && input === undefined) {
+    //     song = "The-Sign";
+    //     run(option, "The-Sign");
+    //  }
+    // console.log(song);
+    
     spotify
     .request("https://api.spotify.com/v1/search?q="+song+"&type=track")
     .then(function(response) {
@@ -116,7 +120,16 @@ function display() {
         
         // We will then re-display the content as an array for later use.
         console.log(dataArr);
-      });
+      
+    //    if(option === "spotify-this-song" && input === undefined) {
+    //       run(option, dataArr[2]);
+    //    }
+
+    //    if(option === "movie-this" && input === undefined) {
+    //     run(option, dataArr[3]);
+    //    }
+
+    });
       
 }
 
@@ -127,6 +140,12 @@ switch(option) {
     break;
 
     case "spotify-this-song":
+    // if(option === "spotify-this-song" && input === undefined) {
+    //     input = "The-Sign";
+    //     displaySong("The-Sign");
+    // break;
+    //     }
+    // else 
     displaySong(input);
     break;
 
