@@ -6,7 +6,7 @@
 * It takes in two parameters/arguments and gives you the output based on the search.
 
 ## Here's how the app works:
-* You can information about
+* You can get information about
  
     * where your favorite artist is performing next
     * your favourite song
@@ -15,8 +15,8 @@
 * These are the commands that can be given to get the info,
 
   * `node liri.js concert-this <artist/band name here>`
-  * `node liri.js spotify-this-song '<song name here>'`
-  * `node liri.js movie-this '<movie name here>'`
+  * `node liri.js spotify-this-song <song name here>`
+  * `node liri.js movie-this <movie name here>`
   * `node liri.js do-what-it-says`
 
 ## Contributed and Maintained by:
