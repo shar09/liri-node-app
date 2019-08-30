@@ -23,6 +23,6 @@
 
 @ https://github.com/shar09  
 
-### Screenshot of the Output displayed when the app is run:
+#### Screenshot of the Output displayed when the app is run:
 
 @ https://drive.google.com/file/d/1sG2AvDB8XKoEOzKemi3zx4X-gSXz4EwF/view?usp=sharing
